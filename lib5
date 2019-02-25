@@ -1,0 +1,34 @@
+COMMANDS = ('+', '-', '*', '/')
+
+def main():
+    expr = input('Введите операцию в польской нотации: ')
+    try:
+        cmd, op1, op2 = expr.split()
+    except ValueError:
+        print('Неправильное количество параметров')
+        return
+
+    try:
+        assert cmd in COMMANDS
+    except AssertionError:
+        print('Недопустимая операция. Доступны:', ' '.join(COMMANDS))
+        return
+
+    try:
+        result = eval(op1 + cmd + op2)
+        print(result)
+    except ZeroDivisionError:
+        print('На 0 делить нельзя')
+    except Exception:
+        print('Ошибка выполнения операции. Проверьте корректность данных')
+
+
+if __name__ == '__main__':
+    print('Нажмите CTRL+C для выхода из программы')
+    try:
+        while True:
+            print()
+            main()
+    except KeyboardInterrupt:
+        import sys
+        sys.exit()
